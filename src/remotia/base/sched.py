@@ -37,28 +37,23 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import remotia
+import time
+import threading
 
-def start_machine(hostname):
-    ssh = remotia.get_ssh(hostname)
-    remotia.deploy_keys(ssh)
-    remotia.setup_environment(
-        ssh,
-        hostname = "tobias.hive",
-        ip_address = "172.16.0.125",
-        netmask = "255.255.0.0",
-        broadcast = "172.16.255.255",
-        network = "172.16.0.0",
-        gateway = "172.16.0.26",
-        domain = "hive",
-        dns_server_1 = "172.16.0.11",
-        dns_server_2 = "172.16.0.12"
-    )
+class Scheduler(threading.Thread):
 
-if __name__ == "__main__":
-    remotia.start_sched()
-    #start_machine("172.16.0.125")
-    #remotia.run_machine(remotia.upgrade)
-    #remotia.run_local(remotia.upgrade)
-    #remotia.omni_backup("node2.startomni.com")
-    #remotia.cleermob_backup("servidor5.hive")
+    def __init__(self, *args, **kwargs):
+        threading.Thread.__init__(self, *args, **kwargs)
+
+    def run(self):
+        threading.Thread.run(self)
+
+        self.active = True
+        while self.active:
+            print "ola"
+            time.sleep(1.0)
+
+def start_sched():
+    scheduler = Scheduler()
+    scheduler.start()
+    return scheduler

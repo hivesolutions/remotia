@@ -19,9 +19,6 @@
 # You should have received a copy of the GNU General Public License
 # along with Hive Remotia System. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = "João Magalhães <joamag@hive.pt>"
-""" The author(s) of the module """
-
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -37,28 +34,6 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import remotia
+import sched
 
-def start_machine(hostname):
-    ssh = remotia.get_ssh(hostname)
-    remotia.deploy_keys(ssh)
-    remotia.setup_environment(
-        ssh,
-        hostname = "tobias.hive",
-        ip_address = "172.16.0.125",
-        netmask = "255.255.0.0",
-        broadcast = "172.16.255.255",
-        network = "172.16.0.0",
-        gateway = "172.16.0.26",
-        domain = "hive",
-        dns_server_1 = "172.16.0.11",
-        dns_server_2 = "172.16.0.12"
-    )
-
-if __name__ == "__main__":
-    remotia.start_sched()
-    #start_machine("172.16.0.125")
-    #remotia.run_machine(remotia.upgrade)
-    #remotia.run_local(remotia.upgrade)
-    #remotia.omni_backup("node2.startomni.com")
-    #remotia.cleermob_backup("servidor5.hive")
+from sched import *
