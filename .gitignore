@@ -1,3 +1,7 @@
 *.pyc
 *.debug
 *.shelve
+
+/build/
+/dist/
+/src/remotia.egg-info/
