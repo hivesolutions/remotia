@@ -37,27 +37,28 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import remotia
+import os
 
-def start_machine(hostname):
-    ssh = remotia.get_ssh(hostname)
-    remotia.deploy_keys(ssh)
-    remotia.setup_environment(
+import remotia.deployers as deployers
+
+config = deployers.config
+
+def omni_backup(hostname):
+    date_s = deployers.get_date_s()
+    file_name = "omni_%s.sql.gz" % date_s
+    omni_path = os.path.join(config.BACKUPS_PATH, "omni")
+    local_path = os.path.join(omni_path, file_name)
+    if not os.path.exists(omni_path): os.makedirs(omni_path)
+
+    ssh = deployers.get_ssh(hostname)
+    deployers.print_host(hostname, "dumping database...")
+    remote_path = deployers.mysql_dump(
         ssh,
-        hostname = "tobias.hive",
-        ip_address = "172.16.0.125",
-        netmask = "255.255.0.0",
-        broadcast = "172.16.255.255",
-        network = "172.16.0.0",
-        gateway = "172.16.0.26",
-        domain = "hive",
-        dns_server_1 = "172.16.0.11",
-        dns_server_2 = "172.16.0.12"
+        database = config.OMNI_DB_NAME,
+        username = config.OMNI_DB_USERNAME,
+        password = config.OMNI_DB_PASSWORD
     )
-
-if __name__ == "__main__":
-    pass
-    #start_machine("172.16.0.125")
-    #remotia.run_machine(scripts.upgrade)
-    #remotia.omni_backup("node2.startomni.com")
-    remotia.cleermob_backup("servidor5.hive")
+    deployers.print_host(hostname, "dumped database")
+    deployers.print_host(hostname, "transferring file...")
+    deployers.get(ssh, remote_path, local_path, remove = True)
+    deployers.print_host(hostname, "file transfered")

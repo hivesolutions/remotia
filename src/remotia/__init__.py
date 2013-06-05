@@ -19,9 +19,6 @@
 # You should have received a copy of the GNU General Public License
 # along with Hive Remotia System. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = "João Magalhães <joamag@hive.pt>"
-""" The author(s) of the module """
-
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -38,17 +35,7 @@ __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
 import deployers
+import scripts
 
-config = deployers.config
-
-def run(method):
-    for hostname in config.ALL_SERVERS:
-        method(hostname)
-
-def run_local(method):
-    for hostname in config.LOCAL_SERVERS:
-        method(hostname)
-
-def run_machine(method):
-    for hostname in config.MACHINE_SERVERS:
-        method(hostname)
+from deployers import *
+from scripts import *

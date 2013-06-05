@@ -37,28 +37,18 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import os
-
-import deployers
+import remotia.deployers as deployers
 
 config = deployers.config
 
-def omni_backup(hostname):
-    date_s = deployers.get_date_s()
-    file_name = "omni_%s.sql.gz" % date_s
-    omni_path = os.path.join(config.BACKUPS_PATH, "omni")
-    local_path = os.path.join(omni_path, file_name)
-    if not os.path.exists(omni_path): os.makedirs(omni_path)
+def run(method):
+    for hostname in config.ALL_SERVERS:
+        method(hostname)
 
-    ssh = deployers.get_ssh(hostname)
-    deployers.print_host(hostname, "dumping database...")
-    remote_path = deployers.mysql_dump(
-        ssh,
-        database = config.OMNI_DB_NAME,
-        username = config.OMNI_DB_USERNAME,
-        password = config.OMNI_DB_PASSWORD
-    )
-    deployers.print_host(hostname, "dumped database")
-    deployers.print_host(hostname, "transferring file...")
-    deployers.get(ssh, remote_path, local_path, remove = True)
-    deployers.print_host(hostname, "file transfered")
+def run_local(method):
+    for hostname in config.LOCAL_SERVERS:
+        method(hostname)
+
+def run_machine(method):
+    for hostname in config.MACHINE_SERVERS:
+        method(hostname)
