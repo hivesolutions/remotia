@@ -13,9 +13,9 @@ In order to provide information for remotia configuration one must create a pyth
 configuration file with the name `rconfig.py` and put it in one of the following
 locations:
 
-* ~
-* ~/Dropbox
-* ~/Dropbox/Home
+* `~`
+* `~/Dropbox`
+* `~/Dropbox/Home`
 
 ### Example
 
