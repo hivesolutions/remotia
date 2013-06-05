@@ -40,9 +40,9 @@ __license__ = "GNU General Public License (GPL), Version 3"
 import common
 
 def update_apt(ssh, upgrade = True, dist_upgrade = True):
-    common.cmd(ssh, "apt-get -y update")
-    if upgrade: common.cmd(ssh, "apt-get -y upgrade")
-    if dist_upgrade: common.cmd(ssh, "apt-get -y dist-upgrade")
+    common.cmd(ssh, "DEBIAN_FRONTEND=noninteractive apt-get -y update")
+    if upgrade: common.cmd(ssh, "DEBIAN_FRONTEND=noninteractive apt-get -y upgrade")
+    if dist_upgrade: common.cmd(ssh, "DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade")
 
 def install_apt(ssh, package):
-    common.cmd(ssh, "apt-get -y install " + package)
+    common.cmd(ssh, "DEBIAN_FRONTEND=noninteractive apt-get -y install " + package)
