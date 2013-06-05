@@ -60,11 +60,11 @@ if not user_home in sys.path: sys.path.append(user_home)
 if not dropbox_base in sys.path: sys.path.append(dropbox_base)
 if not dropbox_home in sys.path: sys.path.append(dropbox_home)
 
-servers = __import__("servers")
-config = servers
+rconfig = __import__("rconfig")
+config = rconfig
 
 def get_ssh(hostname):
-    username, password = servers.SERVERS_MAP.get(hostname, (None, None))
+    username, password = config.SERVERS_MAP.get(hostname, (None, None))
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     print_host(hostname, "connecting...")
