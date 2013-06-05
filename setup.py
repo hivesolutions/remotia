@@ -138,6 +138,9 @@ setuptools.setup(
         "" : os.path.normpath("src")
     },
     data_files = data_files,
+    install_requires = [
+        "paramiko"
+    ],
     classifiers = [
         "Development Status :: 3 - Alpha",
         "Topic :: Utilities",
