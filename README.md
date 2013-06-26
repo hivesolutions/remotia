@@ -1,6 +1,6 @@
 # Remotia System
 
-Infra-structure for the automation of common admin task that uses remote SSH sessions
+Infra-structure for the automation of common admin tasks that uses remote SSH sessions
 to perform commands on remote machines.
 
 ## Installation
