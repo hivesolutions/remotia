@@ -56,10 +56,11 @@ def upgrade(hostname):
 
 def service_update(hostname):
     """
-    Runs a series of typical service update operation in the
-    servers range for the hive infra-structure.
+    Runs a series of typical service update operations in the
+    range of servers for the hive infra-structure.
 
-    These operations are safe to be run in any occasion.
+    These operations are safe to be run in any occasion as they
+    do not create any data destruction or change.
 
     @type hostname: String
     @param hostname: The name of the host to be used for this
