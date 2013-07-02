@@ -72,14 +72,15 @@ def service_update(hostname):
     deployers.print_host(hostname, uptime_s)
 
     if hostname in config.DNS_SERVERS:
-        config = config.DNS_CONFIG.get(hostname, {})
-        deployers.update_dns(ssh, **config)
+        config_v = config.DNS_CONFIG.get(hostname, {})
+        deployers.update_dns(ssh, **config_v)
         deployers.print_host(hostname, "updated dns registers")
 
     if hostname in config.DHCP_SERVERS:
-        config = config.DHCP_CONFIG.get(hostname, {})
-        deployers.update_dhcp(ssh, **config)
+        config_v = config.DHCP_CONFIG.get(hostname, {})
+        deployers.update_dhcp(ssh, **config_v)
         deployers.print_host(hostname, "updated dhcp registers")
 
+    deployers.print_host(hostname, "upgrading software...")
     deployers.update_apt(ssh)
     deployers.print_host(hostname, "software upgraded")
