@@ -37,6 +37,8 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
+import sys
+
 import remotia
 
 def start_machine(hostname):
@@ -56,9 +58,20 @@ def start_machine(hostname):
     )
 
 if __name__ == "__main__":
-    remotia.start_sched()
-    #start_machine("172.16.0.125")
-    #remotia.run_machine(remotia.upgrade)
-    #remotia.run_local(remotia.upgrade)
-    #remotia.omni_backup("node2.startomni.com")
-    #remotia.cleermob_backup("servidor5.hive")
+    # validates that the provided number of arguments
+    # is the expected one, in case it's not raises a
+    # runtime error indicating the problem
+    if len(sys.argv) < 3: raise RuntimeError("Invalid number of arguments")
+
+    # unpacks the second and third command line arguments
+    # as the scope of the execution and the name of the
+    # script to be executed
+    scope = sys.argv[1]
+    script_name = sys.argv[2]
+
+    # retrieves both the loader command for the current
+    # scope and the script to be executed and then used
+    # them to run the requested command
+    command = getattr(remotia, "run_" + scope)
+    script = getattr(remotia, script_name)
+    command(script)
