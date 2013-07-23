@@ -21,7 +21,7 @@ locations:
 
 The basic usage of the remotia command line should follow this syntax:
 
-    remotia $TARGET $SCRIPT
+    remotia ${TARGET} ${SCRIPT}
 
 For example to run the DNS update script in the currently defined remote hosts use
 the following command:
@@ -31,7 +31,7 @@ the following command:
 You can also call direct execution methods that take the host instead of running
 a script on a set of hosts for this case the syntax would be:
 
-    remotia $SCRIPT $HOST
+    remotia ${SCRIPT} ${HOST}
 
 And an example can be the running of the backup operation of omni in a remote host,
 use this method with care as it may take some time to be executed:
