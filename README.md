@@ -5,7 +5,7 @@ to perform commands on remote machines.
 
 ## Installation
 
-* `easy_install remotia`
+    easy_install remotia
 
 ## Configuration
 
