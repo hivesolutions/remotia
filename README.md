@@ -21,12 +21,12 @@ locations:
 
 The basic usage of the remotia command line should follow this syntax:
 
-    remotia $TARGET $SCRIPT`
+    remotia $TARGET $SCRIPT
 
 For example to run the DNS update script in the currently defined remote hosts use
 the following command:
 
-    remotia remote dns_update`
+    remotia remote dns_update
 
 You can also call direct execution methods that take the host instead of running
 a script on a set of hosts for this case the syntax would be:
