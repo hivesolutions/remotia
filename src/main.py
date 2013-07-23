@@ -72,6 +72,10 @@ if __name__ == "__main__":
     # retrieves both the loader command for the current
     # scope and the script to be executed and then used
     # them to run the requested command
-    command = getattr(remotia, "run_" + scope)
-    script = getattr(remotia, script_name)
+    is_command = hasattr(remotia, "run_" + scope)
+    if is_command: getattr(remotia, "run_" + scope)
+    else: command = getattr(remotia, scope)
+    is_script = hasattr(remotia, script_name)
+    if is_script: script = getattr(remotia, script_name)
+    else: script = script_name
     command(script)
