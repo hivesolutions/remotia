@@ -61,4 +61,4 @@ def omni_backup(hostname):
     deployers.print_host(hostname, "dumped database")
     deployers.print_host(hostname, "transferring file...")
     deployers.get(ssh, remote_path, local_path, remove = True)
-    deployers.print_host(hostname, "file transfered")
+    deployers.print_host(hostname, "file transfered, stored in '%s'" % local_path)
