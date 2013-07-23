@@ -106,7 +106,6 @@ def find_data_files(source_path, target_path, patterns):
 # included in the package (this is required for non python
 # files by the setuptools)
 templates_data_files = find_data_files("src/remotia/templates", "remotia/templates", ["*"])
-print templates_data_files
 data_files = templates_data_files
 
 # retrieves the current root directory (from the

@@ -57,7 +57,7 @@ if __name__ == "__main__":
     # scope and the script to be executed and then used
     # them to run the requested command
     is_command = hasattr(remotia, "run_" + scope)
-    if is_command: getattr(remotia, "run_" + scope)
+    if is_command: command = getattr(remotia, "run_" + scope)
     else: command = getattr(remotia, scope)
     is_script = hasattr(remotia, script_name)
     if is_script: script = getattr(remotia, script_name)
