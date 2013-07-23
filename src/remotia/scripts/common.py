@@ -49,6 +49,10 @@ def run_local(method):
     for hostname in config.LOCAL_SERVERS:
         method(hostname)
 
+def run_remote(method):
+    for hostname in config.REMOTE_SERVERS:
+        method(hostname)
+
 def run_machine(method):
     for hostname in config.MACHINE_SERVERS:
         method(hostname)

@@ -45,6 +45,8 @@ import cStringIO
 
 DEBUG = False
 
+SSH_INSTANCES = {}
+
 base_dir = os.path.dirname(__file__)
 base_dir = os.path.normpath(base_dir)
 root_dir = os.path.join(base_dir, "..")
@@ -63,7 +65,10 @@ if not dropbox_home in sys.path: sys.path.append(dropbox_home)
 rconfig = __import__("rconfig")
 config = rconfig
 
-def get_ssh(hostname):
+def get_ssh(hostname, force = False):
+    ssh = SSH_INSTANCES.get(hostname, None)
+    if ssh and not force: return ssh
+
     username, password = config.SERVERS_MAP.get(hostname, (None, None))
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -74,6 +79,8 @@ def get_ssh(hostname):
         password = password
     )
     print_host(hostname, "connected")
+
+    SSH_INSTANCES[hostname] = ssh
     return ssh
 
 def command(ssh, command, shell = False):
