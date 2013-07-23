@@ -54,6 +54,26 @@ def upgrade(hostname):
     deployers.reboot(ssh)
     deployers.print_host(hostname, "reboot order sent")
 
+def dns_update(hostname):
+    ssh = deployers.get_ssh(hostname)
+    if not hostname in config.DNS_SERVERS: return
+    config_v = config.DNS_CONFIG.get(hostname, {})
+    deployers.update_dns(ssh, **config_v)
+    deployers.print_host(hostname, "updated dns registers")
+
+def dhcp_update(hostname):
+    ssh = deployers.get_ssh(hostname)
+    if not hostname in config.DHCP_SERVERS: return
+    config_v = config.DHCP_CONFIG.get(hostname, {})
+    deployers.update_dhcp(ssh, **config_v)
+    deployers.print_host(hostname, "updated dhcp registers")
+
+def apt_update(hostname):
+    ssh = deployers.get_ssh(hostname)
+    deployers.print_host(hostname, "upgrading software...")
+    deployers.update_apt(ssh)
+    deployers.print_host(hostname, "software upgraded")
+
 def service_update(hostname):
     """
     Runs a series of typical service update operations in the
@@ -71,16 +91,6 @@ def service_update(hostname):
     uptime_s = deployers.uptime(ssh)
     deployers.print_host(hostname, uptime_s)
 
-    if hostname in config.DNS_SERVERS:
-        config_v = config.DNS_CONFIG.get(hostname, {})
-        deployers.update_dns(ssh, **config_v)
-        deployers.print_host(hostname, "updated dns registers")
-
-    if hostname in config.DHCP_SERVERS:
-        config_v = config.DHCP_CONFIG.get(hostname, {})
-        deployers.update_dhcp(ssh, **config_v)
-        deployers.print_host(hostname, "updated dhcp registers")
-
-    deployers.print_host(hostname, "upgrading software...")
-    deployers.update_apt(ssh)
-    deployers.print_host(hostname, "software upgraded")
+    dns_update(hostname)
+    dhcp_update(hostname)
+    apt_update(hostname)
