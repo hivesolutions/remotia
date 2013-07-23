@@ -129,10 +129,14 @@ setuptools.setup(
     zip_safe = False,
     packages = [
         "remotia",
+        "remotia.base",
         "remotia.deployers",
         "remotia.scripts"
     ],
     scripts = [
+        "scripts/pypi/remotia_pypi.py",
+        "scripts/pypi/remotia.bat",
+        "scripts/pypi/remotia.sh"
     ],
     package_dir = {
         "" : os.path.normpath("src")
