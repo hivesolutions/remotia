@@ -17,6 +17,15 @@ locations:
 * `~/Dropbox`
 * `~/Dropbox/Home`
 
+## Usage
+
+`remotia $TARGET $SCRIPT`
+
+For example to run the DNS update script in the currently defined remote hosts use
+the following command:
+
+`remotia remote dns_update`
+
 ### Example
 
 	#!/usr/bin/python
