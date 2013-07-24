@@ -39,9 +39,36 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import os
 
+import db
 import remotia.deployers as deployers
 
 config = deployers.config
+
+def omni_deploy(hostname, local_path = None):
+    ssh = deployers.get_ssh(hostname)
+    deployers.print_host(hostname, "deploying mysql...")
+    db.mysql_deploy(hostname)
+    deployers.print_host(hostname, "deployed mysql")
+    deployers.print_host(hostname, "setting users...")
+    deployers.mysql_add_user(ssh, config.OMNI_DB_USERNAME, config.OMNI_DB_PASSWORD)
+    deployers.print_host(hostname, "transferring file...")
+    deployers.put(ssh, local_path, "/tmp/omni_deploy.tar.gz", remove = False)
+    deployers.print_host(hostname, "creating database...")
+    deployers.mysql_create_database(
+        config.OMNI_DB_NAME,
+        username = config.OMNI_DB_USERNAME,
+        password = config.OMNI_DB_PASSWORD
+    )
+    deployers.print_host(hostname, "created database")
+    deployers.print_host(hostname, "loading database...")
+    deployers.mysql_load(
+        ssh,
+        database = config.OMNI_DB_NAME,
+        path = "/tmp/omni_deploy.tar.gz",
+        username = config.OMNI_DB_USERNAME,
+        password = config.OMNI_DB_PASSWORD
+    )
+    deployers.print_host(hostname, "loaded database")
 
 def omni_backup(hostname):
     date_s = deployers.get_date_s()
