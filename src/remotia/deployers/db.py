@@ -73,3 +73,26 @@ def mysql_add_user(ssh, username, password):
         "mysql -e \"grant all on *.* to '%s' identified by '%s';flush privileges;\"" %\
         (username, password)
     )
+    common.cmd(
+        ssh,
+        "mysql -e \"grant all on *.* to '%s'@'localhost' identified by '%s';flush privileges;\"" %\
+        (username, password)
+    )
+
+def mysql_create_database(ssh, name, username = None, password = None):
+    mysql_exec(
+        ssh,
+        "create schema %s default character set utf8",
+        username = username,
+        password = password
+    )
+
+def mysql_exec(ssh, command, username = None, password = None):
+    is_auth = username and password
+    is_auth and common.cmd(
+        ssh,
+        "mysql --user=%s --password=%s -e \"%s\"" % (username, password, command)
+    ) or common.cmd(
+        ssh,
+        "mysql -e \"%s\"" % command
+    )
