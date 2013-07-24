@@ -50,3 +50,26 @@ def mysql_dump(ssh, database = "master", path = None, username = None, password 
             (username, password, database, path)
     )
     return path
+
+def mysql_load(ssh, database = "master", path = None, username = None, password = None):
+    path_base = path.rsplit(".", 1)[0]
+
+    common.cmd(
+        ssh,
+        "gzip -d %s && mysql --user=%s --password=%s %s < %s" %\
+            (path, username, password, database, path_base)
+    )
+
+def mysql_open(ssh, address):
+    common.cmd(
+        ssh,
+        "sed -i \"s/bind-address.*/bind-address=%s/g\" /etc/mysql/my.cnf" %\
+            address
+    )
+
+def mysql_add_user(ssh, username, password):
+    common.cmd(
+        ssh,
+        "mysql -e \"grant all on *.* to '%s' identified by '%s';flush privileges;\"" %\
+        (username, password)
+    )
