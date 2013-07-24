@@ -53,6 +53,10 @@ if __name__ == "__main__":
     scope = sys.argv[1]
     script_name = sys.argv[2]
 
+    # retrieves the set of extra arguments to be sent to the
+    # command to be executed, (this may be dangerous)
+    args =  sys.argv[3:]
+
     # retrieves both the loader command for the current
     # scope and the script to be executed and then used
     # them to run the requested command
@@ -62,4 +66,4 @@ if __name__ == "__main__":
     is_script = hasattr(remotia, script_name)
     if is_script: script = getattr(remotia, script_name)
     else: script = script_name
-    command(script)
+    command(script, *args)
