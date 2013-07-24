@@ -41,18 +41,18 @@ import remotia.deployers as deployers
 
 config = deployers.config
 
-def run(method):
+def run(method, *args):
     for hostname in config.ALL_SERVERS:
-        method(hostname)
+        method(hostname, *args)
 
-def run_local(method):
+def run_local(method, *args):
     for hostname in config.LOCAL_SERVERS:
-        method(hostname)
+        method(hostname, *args)
 
-def run_remote(method):
+def run_remote(method,*args):
     for hostname in config.REMOTE_SERVERS:
-        method(hostname)
+        method(hostname, *args)
 
-def run_machine(method):
+def run_machine(method, *args):
     for hostname in config.MACHINE_SERVERS:
-        method(hostname)
+        method(hostname, *args)
