@@ -36,10 +36,12 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import common
 import consulting
+import db
 import omni
 import operations
 
 from common import *
 from consulting import *
+from db import *
 from omni import *
 from operations import *
