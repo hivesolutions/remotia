@@ -36,7 +36,12 @@ a script on a set of hosts for this case the syntax would be:
 And an example can be the running of the backup operation of omni in a remote host,
 use this method with care as it may take some time to be executed:
 
-    remotia omni_backup node2.startomni.com
+    remotia omni_backup ${HOST}
+	
+You can even add arguments to the script execution, to configure some of its behaviour
+like database location username or password, a simple DBMS setup could be done using:
+
+    remotia mysql_deploy ${HOST} ${USERNAME} ${PASSWORD}
 
 ### Example
 
