@@ -69,11 +69,19 @@ def get_ssh(hostname, force = False):
     ssh = SSH_INSTANCES.get(hostname, None)
     if ssh and not force: return ssh
 
-    username, password = config.SERVERS_MAP.get(hostname, (None, None))
+    username, password = config.SERVERS_MAP.get(hostname, ("root", "root"))
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     print_host(hostname, "connecting...")
-    ssh.connect(
+    home_path = os.path.expanduser("~")
+    id_rsa_path = os.path.join(home_path, ".ssh", "id_rsa")
+    id_rsa_exists = os.path.exists(id_rsa_path)
+    id_rsa_exists and ssh.connect(
+        hostname,
+        username = username,
+        password = password,
+        key_filename = id_rsa_path
+    ) or ssh.connect(
         hostname,
         username = username,
         password = password
