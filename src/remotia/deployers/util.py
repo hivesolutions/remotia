@@ -57,3 +57,11 @@ def get(ssh, remote_path, local_path, remove = False):
         if remove: ftp.remove(remote_path)
     finally:
         ftp.close()
+
+def put(ssh, local_path, remote_path, remove = False):
+    ftp = ssh.open_sftp()
+    try:
+        ftp.put(local_path, remote_path)
+        if remove: ftp.remove(local_path)
+    finally:
+        ftp.close()
