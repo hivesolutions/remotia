@@ -70,6 +70,10 @@ def omni_deploy(hostname, local_path = None):
         password = config.OMNI_DB_PASSWORD
     )
     deployers.print_host(hostname, "loaded database")
+    deployers.print_host(hostname, "removing temporary files...")
+    deployers.rm(ssh, "/tmp/omni_deploy.tar")
+    deployers.rm(ssh, "/tmp/omni_deploy.tar.gz")
+    deployers.print_host(hostname, "removed temporary files")
 
 def omni_backup(hostname):
     date_s = deployers.get_date_s()

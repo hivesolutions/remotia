@@ -19,6 +19,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Hive Remotia System. If not, see <http://www.gnu.org/licenses/>.
 
+__author__ = "João Magalhães <joamag@hive.pt>"
+""" The author(s) of the module """
+
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -34,20 +37,7 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import apt
 import common
-import db
-import file
-import internal
-import service
-import system
-import util
 
-from apt import *
-from common import *
-from db import *
-from file import *
-from internal import *
-from service import *
-from system import *
-from util import *
+def rm(ssh, path, flags = "-rf"):
+    common.cmd(ssh, "rm %s %s" % (flags, path))
