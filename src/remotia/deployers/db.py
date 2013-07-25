@@ -82,7 +82,7 @@ def mysql_add_user(ssh, username, password):
 def mysql_create_database(ssh, name, username = None, password = None):
     mysql_exec(
         ssh,
-        "create schema %s default character set utf8",
+        "create schema %s default character set utf8" % name,
         username = username,
         password = password
     )
