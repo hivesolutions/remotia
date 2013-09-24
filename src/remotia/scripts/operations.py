@@ -48,6 +48,10 @@ def init(hostname):
 
     This script is recommended for every setup of a machine
     running under the current infrastructure.
+
+    @type hostname: String
+    @param hostname: The name of the host to be used for this
+    operation, this should be a fully qualified name.
     """
 
     ssh = deployers.get_ssh(hostname)
