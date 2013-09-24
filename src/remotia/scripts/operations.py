@@ -41,6 +41,18 @@ import remotia.deployers as deployers
 
 config = deployers.config
 
+def init(hostname):
+    """
+    Initializes the system, creating a series of files that
+    may be required for a series of base operations.
+
+    This script is recommended for every setup of a machine
+    running under the current infrastructure.
+    """
+
+    ssh = deployers.get_ssh(hostname)
+    deployers.deploy_keys(ssh)
+
 def reboot(hostname):
     ssh = deployers.get_ssh(hostname)
     deployers.reboot(ssh)
