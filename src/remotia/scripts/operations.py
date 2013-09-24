@@ -51,7 +51,9 @@ def init(hostname):
     """
 
     ssh = deployers.get_ssh(hostname)
+    deployers.print_host(hostname, "deploying the ssh keys...")
     deployers.deploy_keys(ssh)
+    deployers.print_host(hostname, "finished deploying the ssk keys")
 
 def reboot(hostname):
     ssh = deployers.get_ssh(hostname)
