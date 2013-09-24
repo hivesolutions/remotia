@@ -118,7 +118,7 @@ if not root_directory == "": os.chdir(root_directory)
 
 setuptools.setup(
     name = "remotia",
-    version = "0.1.4",
+    version = "0.1.5",
     author = "Hive Solutions Lda.",
     author_email = "development@hive.pt",
     description = "Remotia System",

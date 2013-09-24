@@ -44,10 +44,10 @@ import tempfile
 import common
 
 def deploy_keys(ssh):
-    private_key = os.path.join(common.dropbox_home, "id_rsa")
-    public_key = os.path.join(common.dropbox_home, "id_rsa.pub")
-    known_hosts = os.path.join(common.dropbox_home, "known_hosts")
-    authorized_keys = os.path.join(common.dropbox_home, "authorized_keys")
+    private_key = os.path.join(common.dropbox_home, "ssh", "id_rsa")
+    public_key = os.path.join(common.dropbox_home, "ssh", "id_rsa.pub")
+    known_hosts = os.path.join(common.dropbox_home, "ssh", "known_hosts")
+    authorized_keys = os.path.join(common.dropbox_home, "ssh", "authorized_keys")
 
     ftp = ssh.open_sftp()
     try:
