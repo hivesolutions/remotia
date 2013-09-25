@@ -67,7 +67,7 @@ def deploy_keys(ssh):
 def create_users(ssh, users):
     for username, password in users:
         common.cmd(ssh, "useradd " + username)
-        common.cmd(ssh, "echo \"" + username + "\":" + password)
+        common.cmd(ssh, "echo \"" + username + "\":" + password + " | chpasswd")
 
 def setup_environment(ssh, **kwargs):
     hostname = kwargs.get("hostname", "localhost")
