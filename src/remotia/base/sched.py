@@ -50,7 +50,6 @@ class Scheduler(threading.Thread):
 
         self.active = True
         while self.active:
-            print "ola"
             time.sleep(1.0)
 
 def start_sched():
