@@ -53,7 +53,7 @@ def omni_deploy(hostname, local_path = None):
     deployers.mysql_add_user(ssh, config.OMNI_DB_USERNAME, config.OMNI_DB_PASSWORD)
     deployers.print_host(hostname, "transferring file...")
     deployers.put(ssh, local_path, "/tmp/omni_deploy.tar.gz", remove = False)
-    deployers.print_host(hostname, "creating database...")
+    deployers.print_host(hostname, "creating '%s' database..." % config.OMNI_DB_NAME)
     deployers.mysql_create_database(
         ssh,
         config.OMNI_DB_NAME,
