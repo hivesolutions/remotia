@@ -46,8 +46,8 @@ def mysql_dump(ssh, database = "master", path = None, username = None, password 
     path = path or "/tmp/%s_%d.sql.gz" % (database, timestamp)
     common.cmd(
         ssh,
-        "mysqldump --opt --user=%s --password=%s %s | gzip > %s" %\
-            (username, password, database, path)
+        "mysqldump --opt --user=%s --password=%s %s | gzip > %s" %
+        (username, password, database, path)
     )
     return path
 
@@ -56,26 +56,26 @@ def mysql_load(ssh, database = "master", path = None, username = None, password 
 
     common.cmd(
         ssh,
-        "gzip -d %s && mysql --user=%s --password=%s %s < %s" %\
-            (path, username, password, database, path_base)
+        "gzip -d %s && mysql --user=%s --password=%s %s < %s" %
+        (path, username, password, database, path_base)
     )
 
 def mysql_open(ssh, address):
     common.cmd(
         ssh,
-        "sed -i \"s/bind-address.*/bind-address=%s/g\" /etc/mysql/my.cnf" %\
-            address
+        "sed -i \"s/bind-address.*/bind-address=%s/g\" /etc/mysql/my.cnf" %
+        address
     )
 
 def mysql_add_user(ssh, username, password):
     common.cmd(
         ssh,
-        "mysql -e \"grant all on *.* to '%s' identified by '%s';flush privileges;\"" %\
+        "mysql -e \"grant all on *.* to '%s' identified by '%s';flush privileges;\"" %
         (username, password)
     )
     common.cmd(
         ssh,
-        "mysql -e \"grant all on *.* to '%s'@'localhost' identified by '%s';flush privileges;\"" %\
+        "mysql -e \"grant all on *.* to '%s'@'localhost' identified by '%s';flush privileges;\"" %
         (username, password)
     )
 
