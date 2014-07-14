@@ -5,7 +5,7 @@ to perform commands on remote machines.
 
 ## Installation
 
-    easy_install remotia
+    pip install remotia
 
 ## Configuration
 
