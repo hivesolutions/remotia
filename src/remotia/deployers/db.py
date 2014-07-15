@@ -41,23 +41,36 @@ import time
 
 import common
 
-def mysql_dump(ssh, database = "master", path = None, username = None, password = None):
+def mysql_dump(
+    ssh,
+    database = "master",
+    path = None,
+    host = "127.0.0.1",
+    username = None,
+    password = None
+):
     timestamp = int(time.time())
     path = path or "/tmp/%s_%d.sql.gz" % (database, timestamp)
     common.cmd(
         ssh,
-        "mysqldump --opt --user=%s --password=%s %s | gzip > %s" %
-        (username, password, database, path)
+        "mysqldump --opt --host=%s --user=%s --password=%s %s | gzip > %s" %
+        (host, username, password, database, path)
     )
     return path
 
-def mysql_load(ssh, database = "master", path = None, username = None, password = None):
+def mysql_load(
+    ssh,
+    database = "master",
+    path = None,
+    host = "127.0.0.1",
+    username = None,
+    password = None
+):
     path_base = path.rsplit(".", 1)[0]
-
     common.cmd(
         ssh,
-        "gzip -d %s && mysql --user=%s --password=%s %s < %s" %
-        (path, username, password, database, path_base)
+        "gzip -d %s && mysql --host=%s --user=%s --password=%s %s < %s" %
+        (path, host, username, password, database, path_base)
     )
 
 def mysql_open(ssh, address):
@@ -79,19 +92,20 @@ def mysql_add_user(ssh, username, password):
         (username, password)
     )
 
-def mysql_create_database(ssh, name, username = None, password = None):
+def mysql_create_database(ssh, name, host = "127.0.0.1", username = None, password = None):
     mysql_exec(
         ssh,
         "create schema %s default character set utf8" % name,
+        host = host,
         username = username,
         password = password
     )
 
-def mysql_exec(ssh, command, username = None, password = None):
+def mysql_exec(ssh, command, host = "127.0.0.1", username = None, password = None):
     is_auth = username and password
     is_auth and common.cmd(
         ssh,
-        "mysql --user=%s --password=%s -e \"%s\"" % (username, password, command)
+        "mysql --host=%s --user=%s --password=%s -e \"%s\"" % (host, username, password, command)
     ) or common.cmd(
         ssh,
         "mysql -e \"%s\"" % command
