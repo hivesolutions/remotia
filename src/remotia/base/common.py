@@ -37,6 +37,6 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
-VERSION = "0.2.0"
+VERSION = "0.2.1"
 """ The current version of the remotia infra-structure
 that may be used for logging and debugging purposes """
