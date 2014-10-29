@@ -37,7 +37,7 @@ And an example can be the running of the backup operation of omni in a remote ho
 use this method with care as it may take some time to be executed:
 
     remotia omni_backup ${HOST}
-	
+
 You can even add arguments to the script execution, to configure some of its behaviour
 like database location username or password, a simple DBMS setup could be done using:
 
@@ -47,7 +47,7 @@ like database location username or password, a simple DBMS setup could be done u
 
 	#!/usr/bin/python
 	# -*- coding: utf-8 -*-
-	
+
 	SERVERS = (
 	    ("remote1.host.com", "root", "root"),
 	    ("remote2.host.com", "root", "root"),
@@ -55,23 +55,27 @@ like database location username or password, a simple DBMS setup could be done u
 	    ("local2.host.com", "root", "root"),
 	    ("machine1.host.com", "root", "root")
 	)
-	
+
 	SERVERS_MAP = {}
-	
+
 	ALL_SERVERS = ()
-	
+
 	REMOTE_SERVERS = (
 	    "remote1.host.com",
 	    "remote2.host.com"
 	)
-	
+
 	LOCAL_SERVERS = (
 	    "local1.host.com",
 	    "local2.host.com"
 	)
-	
+
 	MACHINE_SERVERS = (
 	    "machine1.host.com",
 	)
 	
 	ALL_SERVERS = SERVERS_MAP.keys()
+
+## License
+
+Remotia is currently licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/).
