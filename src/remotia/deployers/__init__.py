@@ -34,20 +34,22 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import apt
-import common
-import db
-import file
-import internal
-import service
-import system
-import util
+from . import apt
+from . import common
+from . import db
+from . import file
+from . import internal
+from . import service
+from . import system
+from . import util
 
-from apt import *
-from common import *
-from db import *
-from file import *
-from internal import *
-from service import *
-from system import *
-from util import *
+from .apt import update_apt, install_apt
+from .common import get_ssh, command, command_single, command_shell, print_host,\
+    get_date_s, get_date_time_s, cmd
+from .db import mysql_dump, mysql_load, mysql_open, mysql_add_user, mysql_create_database,\
+    mysql_exec
+from .file import rm
+from .internal import deploy_repo, deploy_colony, deploy_omni
+from .service import restart_service, update_service, update_dns, update_dhcp
+from .system import deploy_keys, create_users, setup_environment
+from .util import uptime, reboot, get, put

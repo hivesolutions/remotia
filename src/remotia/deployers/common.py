@@ -39,9 +39,9 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import os
 import sys
+import legacy
 import paramiko
 import datetime
-import cStringIO
 
 DEBUG = False
 
@@ -100,8 +100,8 @@ def command_single(ssh, command):
     data_out = stdout.readlines()
     data_err = stderr.readlines()
 
-    stream_out = cStringIO.StringIO()
-    stream_err = cStringIO.StringIO()
+    stream_out = legacy.StringIO()
+    stream_err = legacy.StringIO()
 
     for line in data_out: stream_out.write(line + "\n")
     for line in data_err: stream_err.write(line + "\n")
@@ -124,7 +124,7 @@ def command_shell(ssh, command):
     stdin.write(command + "\r\n" + "exit\r\n")
     data_out = stdout.readlines()
 
-    stream_out = cStringIO.StringIO()
+    stream_out = legacy.StringIO()
 
     for line in data_out: stream_out.write(line + "\n")
 

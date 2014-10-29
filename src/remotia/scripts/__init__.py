@@ -34,14 +34,15 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import common
-import consulting
-import db
-import omni
-import operations
+from . import common
+from . import consulting
+from . import db
+from . import omni
+from . import operations
 
-from common import *
-from consulting import *
-from db import *
-from omni import *
-from operations import *
+from .common import run, run_local, run_remote, run_machine
+from .consulting import cleermob_backup
+from .db import mysql_deploy
+from .omni import omni_deploy, omni_backup
+from .operations import init, reboot, upgrade, dns_update, dhcp_update, apt_update,\
+    service_update
