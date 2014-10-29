@@ -68,7 +68,7 @@ setuptools.setup(
     ],
     entry_points = {
         "console_scripts" : [
-            "remotia = remotia.base.exec:main"
+            "remotia = remotia.base.run:main"
         ]
     },
     classifiers = [

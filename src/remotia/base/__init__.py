@@ -34,8 +34,10 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import common
-import sched
+from . import common
+from . import run
+from . import sched
 
-from common import *
-from sched import *
+from .common import VERSION
+from .run import main
+from .sched import Scheduler, start_sched
