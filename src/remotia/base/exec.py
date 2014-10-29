@@ -41,23 +41,7 @@ import sys
 
 import remotia
 
-def start_machine(hostname):
-    ssh = remotia.get_ssh(hostname)
-    remotia.deploy_keys(ssh)
-    remotia.setup_environment(
-        ssh,
-        hostname = "tobias.hive",
-        ip_address = "172.16.0.125",
-        netmask = "255.255.0.0",
-        broadcast = "172.16.255.255",
-        network = "172.16.0.0",
-        gateway = "172.16.0.26",
-        domain = "hive",
-        dns_server_1 = "172.16.0.11",
-        dns_server_2 = "172.16.0.12"
-    )
-
-if __name__ == "__main__":
+def main():
     # validates that the provided number of arguments
     # is the expected one, in case it's not raises a
     # runtime error indicating the problem
@@ -83,3 +67,6 @@ if __name__ == "__main__":
     if is_script: script = getattr(remotia, script_name)
     else: script = script_name
     command(script, *args)
+
+if __name__ == "__main__":
+    main()

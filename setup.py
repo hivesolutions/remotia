@@ -48,19 +48,14 @@ setuptools.setup(
     author_email = "development@hive.pt",
     description = "Remotia System",
     license = "GNU General Public License (GPL), Version 3",
-    keywords = "remotia ssh automation",
-    url = "http://remotia.com",
+    keywords = "remotia ssh automation console",
+    url = "http://remotia.hive.pt",
     zip_safe = False,
     packages = [
         "remotia",
         "remotia.base",
         "remotia.deployers",
         "remotia.scripts"
-    ],
-    scripts = [
-        "scripts/pypi/remotia_pypi.py",
-        "scripts/pypi/remotia.bat",
-        "scripts/pypi/remotia.sh"
     ],
     package_dir = {
         "" : os.path.normpath("src")
@@ -71,6 +66,11 @@ setuptools.setup(
     install_requires = [
         "paramiko"
     ],
+    entry_points = {
+        "console_scripts" : [
+            "remotia = remotia.base.exec:main"
+        ]
+    },
     classifiers = [
         "Development Status :: 3 - Alpha",
         "Topic :: Utilities",
