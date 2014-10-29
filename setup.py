@@ -34,7 +34,7 @@ __date__ = "$LastChangedDate$"
 __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 """ The copyright for the module """
 
-__license__ = "GNU General Public License (GPL), Version 3"
+__license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
 import os
@@ -47,7 +47,7 @@ setuptools.setup(
     author = "Hive Solutions Lda.",
     author_email = "development@hive.pt",
     description = "Remotia System",
-    license = "GNU General Public License (GPL), Version 3",
+    license = "Apache License, Version 2.0",
     keywords = "remotia ssh automation console",
     url = "http://remotia.hive.pt",
     zip_safe = False,
