@@ -39,8 +39,9 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import os
 
-import db
 import remotia.deployers as deployers
+
+from remotia.scripts import  db
 
 config = deployers.config
 

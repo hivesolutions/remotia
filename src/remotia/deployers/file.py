@@ -37,7 +37,7 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import common
+from remotia.deployers import common
 
 def rm(ssh, path, flags = "-rf"):
     common.cmd(ssh, "rm %s %s" % (flags, path))

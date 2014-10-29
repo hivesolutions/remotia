@@ -41,7 +41,7 @@ import os
 import jinja2
 import tempfile
 
-import common
+from remotia.deployers import common
 
 def deploy_keys(ssh):
     private_key = os.path.join(common.dropbox_home, "ssh", "id_rsa")
@@ -51,16 +51,16 @@ def deploy_keys(ssh):
 
     ftp = ssh.open_sftp()
     try:
-        try: ftp.mkdir("/root/.ssh", 0700)
+        try: ftp.mkdir("/root/.ssh", 0o700)
         except: pass
         ftp.put(private_key, "/root/.ssh/id_rsa")
         ftp.put(public_key, "/root/.ssh/id_rsa.pub")
         ftp.put(known_hosts, "/root/.ssh/known_hosts")
         ftp.put(authorized_keys, "/root/.ssh/authorized_keys")
-        ftp.chmod("/root/.ssh/id_rsa", 0600)
-        ftp.chmod("/root/.ssh/id_rsa.pub", 0644)
-        ftp.chmod("/root/.ssh/known_hosts", 0644)
-        ftp.chmod("/root/.ssh/authorized_keys", 0600)
+        ftp.chmod("/root/.ssh/id_rsa", 0o600)
+        ftp.chmod("/root/.ssh/id_rsa.pub", 0o644)
+        ftp.chmod("/root/.ssh/known_hosts", 0o644)
+        ftp.chmod("/root/.ssh/authorized_keys", 0o600)
     finally:
         ftp.close()
 

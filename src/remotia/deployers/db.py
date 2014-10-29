@@ -39,7 +39,7 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import time
 
-import common
+from remotia.deployers import common
 
 def mysql_dump(
     ssh,
