@@ -64,6 +64,7 @@ setuptools.setup(
         "remotia" : ["templates/*"]
     },
     install_requires = [
+        "legacy",
         "paramiko"
     ],
     entry_points = {

@@ -44,7 +44,7 @@ from . import system
 from . import util
 
 from .apt import update_apt, install_apt
-from .common import get_ssh, command, command_single, command_shell, print_host,\
+from .common import config, get_ssh, command, command_single, command_shell, print_host,\
     get_date_s, get_date_time_s, cmd
 from .db import mysql_dump, mysql_load, mysql_open, mysql_add_user, mysql_create_database,\
     mysql_exec

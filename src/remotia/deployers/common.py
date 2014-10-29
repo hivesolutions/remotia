@@ -110,9 +110,9 @@ def command_single(ssh, command):
     stream_err.seek(0)
 
     if DEBUG:
-        for line in data_out: print line
+        for line in data_out: print(line)
 
-    for line in data_err: print line
+    for line in data_err: print(line)
 
     return stdin, stream_out, stream_err
 
@@ -131,13 +131,13 @@ def command_shell(ssh, command):
     stream_out.seek(0)
 
     if DEBUG:
-        for line in data_out: print line
+        for line in data_out: print(line)
 
     stdout.close()
     stdin.close()
 
 def print_host(hostname, message):
-    print "[" + hostname + "] " + message
+    print("[" + hostname + "] " + message)
 
 def get_date_s():
     date_time = datetime.datetime.now()
