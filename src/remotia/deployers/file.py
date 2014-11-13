@@ -37,7 +37,7 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
-from remotia.deployers import common
+from . import common
 
 def rm(ssh, path, flags = "-rf"):
     common.cmd(ssh, "rm %s %s" % (flags, path))

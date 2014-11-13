@@ -41,7 +41,7 @@ import os
 
 import remotia.deployers as deployers
 
-from remotia.scripts import  db
+from . import db
 
 config = deployers.config
 

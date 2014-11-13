@@ -39,7 +39,7 @@ __license__ = "Apache License, Version 2.0"
 
 import time
 
-from remotia.deployers import common
+from . import common
 
 def mysql_dump(
     ssh,

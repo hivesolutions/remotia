@@ -37,8 +37,8 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
-from remotia.deployers import apt
-from remotia.deployers import common
+from . import apt
+from . import common
 
 def deploy_repo(ssh, path = "/opt/repo.extra"):
     common.cmd(ssh, "mkdir -p " + path)

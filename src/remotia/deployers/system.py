@@ -41,7 +41,7 @@ import os
 import jinja2
 import tempfile
 
-from remotia.deployers import common
+from . import common
 
 def deploy_keys(ssh):
     private_key = os.path.join(common.dropbox_home, "ssh", "id_rsa")
