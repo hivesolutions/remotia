@@ -111,7 +111,7 @@ def setup_environment(ssh, **kwargs):
     finally: file.close()
 
     template = env.get_template("interfaces.tpl")
-    data =  template.render(net = net)
+    data = template.render(net = net)
     file = open(dir_path + "/interfaces", "wb")
     try: file.write(data)
     finally: file.close()

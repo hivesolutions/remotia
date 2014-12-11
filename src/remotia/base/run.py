@@ -55,7 +55,7 @@ def main():
 
     # retrieves the set of extra arguments to be sent to the
     # command to be executed, (this may be dangerous)
-    args =  sys.argv[3:]
+    args = sys.argv[3:]
 
     # retrieves both the loader command for the current
     # scope and the script to be executed and then used
