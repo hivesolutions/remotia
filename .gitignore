@@ -2,6 +2,6 @@
 *.debug
 *.shelve
 
-/build
 /dist
+/build
 /src/remotia.egg-info
