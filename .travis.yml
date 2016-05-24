@@ -8,8 +8,6 @@ python:
   - "3.4"
   - "3.5"
   - "nightly"
-  - "pypy"
-  - "pypy3"
 install:
   - pip install pkginfo<1.3
   - pip install -r requirements.txt
