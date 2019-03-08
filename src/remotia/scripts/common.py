@@ -44,23 +44,23 @@ config = deployers.config
 def run(method, *args):
     for hostname in config.ALL_SERVERS:
         try: method(hostname, *args)
-        except BaseException as exception:
+        except Exception as exception:
             deployers.print_host(hostname, str(exception))
 
 def run_local(method, *args):
     for hostname in config.LOCAL_SERVERS:
         try: method(hostname, *args)
-        except BaseException as exception:
+        except Exception as exception:
             deployers.print_host(hostname, str(exception))
 
 def run_remote(method,*args):
     for hostname in config.REMOTE_SERVERS:
         try: method(hostname, *args)
-        except BaseException as exception:
+        except Exception as exception:
             deployers.print_host(hostname, str(exception))
 
 def run_machine(method, *args):
     for hostname in config.MACHINE_SERVERS:
         try: method(hostname, *args)
-        except BaseException as exception:
+        except Exception as exception:
             deployers.print_host(hostname, str(exception))
