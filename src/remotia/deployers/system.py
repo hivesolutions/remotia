@@ -52,7 +52,7 @@ def deploy_keys(ssh):
     ftp = ssh.open_sftp()
     try:
         try: ftp.mkdir("/root/.ssh", 0o700)
-        except: pass
+        except Exception: pass
         ftp.put(private_key, "/root/.ssh/id_rsa")
         ftp.put(public_key, "/root/.ssh/id_rsa.pub")
         ftp.put(known_hosts, "/root/.ssh/known_hosts")
