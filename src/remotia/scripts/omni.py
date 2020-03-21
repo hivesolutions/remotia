@@ -47,9 +47,9 @@ config = deployers.config
 
 def omni_deploy(hostname, local_path = None):
     ssh = deployers.get_ssh(hostname)
-    deployers.print_host(hostname, "deploying mysql...")
+    deployers.print_host(hostname, "deploying MySQL...")
     db.mysql_deploy(hostname)
-    deployers.print_host(hostname, "deployed mysql")
+    deployers.print_host(hostname, "deployed MySQL")
     deployers.print_host(hostname, "setting users...")
     deployers.mysql_add_user(ssh, config.OMNI_DB_USERNAME, config.OMNI_DB_PASSWORD)
     deployers.print_host(hostname, "transferring file...")
