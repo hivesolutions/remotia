@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Hive Remotia System
-# Copyright (c) 2008-2020 Hive Solutions Lda.
+# Copyright (c) 2008-2025 Hive Solutions Lda.
 #
 # This file is part of Hive Remotia System.
 #
@@ -22,16 +22,7 @@
 __author__ = "João Magalhães <joamag@hive.pt>"
 """ The author(s) of the module """
 
-__version__ = "1.0.0"
-""" The version of the module """
-
-__revision__ = "$LastChangedRevision$"
-""" The revision number of the module """
-
-__date__ = "$LastChangedDate$"
-""" The last change date of the module """
-
-__copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
+__copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
@@ -39,10 +30,14 @@ __license__ = "Apache License, Version 2.0"
 
 from . import common
 
-def update_apt(ssh, upgrade = True, dist_upgrade = True):
+
+def update_apt(ssh, upgrade=True, dist_upgrade=True):
     common.cmd(ssh, "DEBIAN_FRONTEND=noninteractive apt-get -y update")
-    if upgrade: common.cmd(ssh, "DEBIAN_FRONTEND=noninteractive apt-get -y upgrade")
-    if dist_upgrade: common.cmd(ssh, "DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade")
+    if upgrade:
+        common.cmd(ssh, "DEBIAN_FRONTEND=noninteractive apt-get -y upgrade")
+    if dist_upgrade:
+        common.cmd(ssh, "DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade")
+
 
 def install_apt(ssh, package):
     common.cmd(ssh, "DEBIAN_FRONTEND=noninteractive apt-get -y install " + package)

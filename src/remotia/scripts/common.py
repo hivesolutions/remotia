@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Hive Remotia System
-# Copyright (c) 2008-2020 Hive Solutions Lda.
+# Copyright (c) 2008-2025 Hive Solutions Lda.
 #
 # This file is part of Hive Remotia System.
 #
@@ -22,16 +22,7 @@
 __author__ = "João Magalhães <joamag@hive.pt>"
 """ The author(s) of the module """
 
-__version__ = "1.0.0"
-""" The version of the module """
-
-__revision__ = "$LastChangedRevision$"
-""" The revision number of the module """
-
-__date__ = "$LastChangedDate$"
-""" The last change date of the module """
-
-__copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
+__copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
@@ -41,26 +32,34 @@ import remotia.deployers as deployers
 
 config = deployers.config
 
+
 def run(method, *args):
     for hostname in config.ALL_SERVERS:
-        try: method(hostname, *args)
+        try:
+            method(hostname, *args)
         except Exception as exception:
             deployers.print_host(hostname, str(exception))
+
 
 def run_local(method, *args):
     for hostname in config.LOCAL_SERVERS:
-        try: method(hostname, *args)
+        try:
+            method(hostname, *args)
         except Exception as exception:
             deployers.print_host(hostname, str(exception))
 
-def run_remote(method,*args):
+
+def run_remote(method, *args):
     for hostname in config.REMOTE_SERVERS:
-        try: method(hostname, *args)
+        try:
+            method(hostname, *args)
         except Exception as exception:
             deployers.print_host(hostname, str(exception))
+
 
 def run_machine(method, *args):
     for hostname in config.MACHINE_SERVERS:
-        try: method(hostname, *args)
+        try:
+            method(hostname, *args)
         except Exception as exception:
             deployers.print_host(hostname, str(exception))

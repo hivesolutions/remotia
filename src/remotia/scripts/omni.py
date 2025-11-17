@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Hive Remotia System
-# Copyright (c) 2008-2020 Hive Solutions Lda.
+# Copyright (c) 2008-2025 Hive Solutions Lda.
 #
 # This file is part of Hive Remotia System.
 #
@@ -22,16 +22,7 @@
 __author__ = "João Magalhães <joamag@hive.pt>"
 """ The author(s) of the module """
 
-__version__ = "1.0.0"
-""" The version of the module """
-
-__revision__ = "$LastChangedRevision$"
-""" The revision number of the module """
-
-__date__ = "$LastChangedDate$"
-""" The last change date of the module """
-
-__copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
+__copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
@@ -45,7 +36,8 @@ from . import db
 
 config = deployers.config
 
-def omni_deploy(hostname, local_path = None):
+
+def omni_deploy(hostname, local_path=None):
     ssh = deployers.get_ssh(hostname)
     deployers.print_host(hostname, "deploying MySQL...")
     db.mysql_deploy(hostname)
@@ -53,22 +45,22 @@ def omni_deploy(hostname, local_path = None):
     deployers.print_host(hostname, "setting users...")
     deployers.mysql_add_user(ssh, config.OMNI_DB_USERNAME, config.OMNI_DB_PASSWORD)
     deployers.print_host(hostname, "transferring file...")
-    deployers.put(ssh, local_path, "/tmp/omni_deploy.tar.gz", remove = False)
+    deployers.put(ssh, local_path, "/tmp/omni_deploy.tar.gz", remove=False)
     deployers.print_host(hostname, "creating '%s' database..." % config.OMNI_DB_NAME)
     deployers.mysql_create_database(
         ssh,
         config.OMNI_DB_NAME,
-        username = config.OMNI_DB_USERNAME,
-        password = config.OMNI_DB_PASSWORD
+        username=config.OMNI_DB_USERNAME,
+        password=config.OMNI_DB_PASSWORD,
     )
     deployers.print_host(hostname, "created database")
     deployers.print_host(hostname, "loading database...")
     deployers.mysql_load(
         ssh,
-        database = config.OMNI_DB_NAME,
-        path = "/tmp/omni_deploy.tar.gz",
-        username = config.OMNI_DB_USERNAME,
-        password = config.OMNI_DB_PASSWORD
+        database=config.OMNI_DB_NAME,
+        path="/tmp/omni_deploy.tar.gz",
+        username=config.OMNI_DB_USERNAME,
+        password=config.OMNI_DB_PASSWORD,
     )
     deployers.print_host(hostname, "loaded database")
     deployers.print_host(hostname, "removing temporary files...")
@@ -76,22 +68,24 @@ def omni_deploy(hostname, local_path = None):
     deployers.rm(ssh, "/tmp/omni_deploy.tar.gz")
     deployers.print_host(hostname, "removed temporary files")
 
+
 def omni_backup(hostname):
     date_s = deployers.get_date_s()
     file_name = "omni_%s.sql.gz" % date_s
     omni_path = os.path.join(config.BACKUPS_PATH, "omni")
     local_path = os.path.join(omni_path, file_name)
-    if not os.path.exists(omni_path): os.makedirs(omni_path)
+    if not os.path.exists(omni_path):
+        os.makedirs(omni_path)
 
     ssh = deployers.get_ssh(hostname)
     deployers.print_host(hostname, "dumping database...")
     remote_path = deployers.mysql_dump(
         ssh,
-        database = config.OMNI_DB_NAME,
-        username = config.OMNI_DB_USERNAME,
-        password = config.OMNI_DB_PASSWORD
+        database=config.OMNI_DB_NAME,
+        username=config.OMNI_DB_USERNAME,
+        password=config.OMNI_DB_PASSWORD,
     )
     deployers.print_host(hostname, "dumped database")
     deployers.print_host(hostname, "transferring file...")
-    deployers.get(ssh, remote_path, local_path, remove = True)
+    deployers.get(ssh, remote_path, local_path, remove=True)
     deployers.print_host(hostname, "file transfered, stored in '%s'" % local_path)

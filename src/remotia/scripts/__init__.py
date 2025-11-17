@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Hive Remotia System
-# Copyright (c) 2008-2020 Hive Solutions Lda.
+# Copyright (c) 2008-2025 Hive Solutions Lda.
 #
 # This file is part of Hive Remotia System.
 #
@@ -19,16 +19,7 @@
 # You should have received a copy of the Apache License along with
 # Hive Remotia System. If not, see <http://www.apache.org/licenses/>.
 
-__version__ = "1.0.0"
-""" The version of the module """
-
-__revision__ = "$LastChangedRevision$"
-""" The revision number of the module """
-
-__date__ = "$LastChangedDate$"
-""" The last change date of the module """
-
-__copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
+__copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
@@ -44,5 +35,12 @@ from .common import run, run_local, run_remote, run_machine
 from .consulting import cleermob_backup
 from .db import mysql_deploy
 from .omni import omni_deploy, omni_backup
-from .operations import init, reboot, upgrade, dns_update, dhcp_update, apt_update,\
-    service_update
+from .operations import (
+    init,
+    reboot,
+    upgrade,
+    dns_update,
+    dhcp_update,
+    apt_update,
+    service_update,
+)

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Hive Remotia System
-# Copyright (c) 2008-2020 Hive Solutions Lda.
+# Copyright (c) 2008-2025 Hive Solutions Lda.
 #
 # This file is part of Hive Remotia System.
 #
@@ -22,16 +22,7 @@
 __author__ = "João Magalhães <joamag@hive.pt>"
 """ The author(s) of the module """
 
-__version__ = "1.0.0"
-""" The version of the module """
-
-__revision__ = "$LastChangedRevision$"
-""" The revision number of the module """
-
-__date__ = "$LastChangedDate$"
-""" The last change date of the module """
-
-__copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
+__copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
@@ -58,16 +49,21 @@ dropbox_base = os.path.join(user_home, "Dropbox")
 dropbox_home = os.path.join(dropbox_base, "Home")
 ssh_home = os.path.join(dropbox_home, "ssh")
 
-if not user_home in sys.path: sys.path.append(user_home)
-if not dropbox_base in sys.path: sys.path.append(dropbox_base)
-if not dropbox_home in sys.path: sys.path.append(dropbox_home)
+if not user_home in sys.path:
+    sys.path.append(user_home)
+if not dropbox_base in sys.path:
+    sys.path.append(dropbox_base)
+if not dropbox_home in sys.path:
+    sys.path.append(dropbox_home)
 
 rconfig = __import__("rconfig")
 config = rconfig
 
-def get_ssh(hostname, force = False):
+
+def get_ssh(hostname, force=False):
     ssh = SSH_INSTANCES.get(hostname, None)
-    if ssh and not force: return ssh
+    if ssh and not force:
+        return ssh
 
     username, password = config.SERVERS_MAP.get(hostname, ("root", "root"))
     ssh = paramiko.SSHClient()
@@ -77,23 +73,20 @@ def get_ssh(hostname, force = False):
     id_rsa_path = os.path.join(home_path, ".ssh", "id_rsa")
     id_rsa_exists = os.path.exists(id_rsa_path)
     id_rsa_exists and ssh.connect(
-        hostname,
-        username = username,
-        password = password,
-        key_filename = id_rsa_path
-    ) or ssh.connect(
-        hostname,
-        username = username,
-        password = password
-    )
+        hostname, username=username, password=password, key_filename=id_rsa_path
+    ) or ssh.connect(hostname, username=username, password=password)
     print_host(hostname, "connected")
 
     SSH_INSTANCES[hostname] = ssh
     return ssh
 
-def command(ssh, command, shell = False):
-    if shell: return command_shell(ssh, command)
-    else: return command_single(ssh, command)
+
+def command(ssh, command, shell=False):
+    if shell:
+        return command_shell(ssh, command)
+    else:
+        return command_single(ssh, command)
+
 
 def command_single(ssh, command):
     stdin, stdout, stderr = ssh.exec_command(command)
@@ -103,18 +96,23 @@ def command_single(ssh, command):
     stream_out = legacy.StringIO()
     stream_err = legacy.StringIO()
 
-    for line in data_out: stream_out.write(line + "\n")
-    for line in data_err: stream_err.write(line + "\n")
+    for line in data_out:
+        stream_out.write(line + "\n")
+    for line in data_err:
+        stream_err.write(line + "\n")
 
     stream_out.seek(0)
     stream_err.seek(0)
 
     if DEBUG:
-        for line in data_out: print(line)
+        for line in data_out:
+            print(line)
 
-    for line in data_err: print(line)
+    for line in data_err:
+        print(line)
 
     return stdin, stream_out, stream_err
+
 
 def command_shell(ssh, command):
     channel = ssh.invoke_shell()
@@ -126,27 +124,33 @@ def command_shell(ssh, command):
 
     stream_out = legacy.StringIO()
 
-    for line in data_out: stream_out.write(line + "\n")
+    for line in data_out:
+        stream_out.write(line + "\n")
 
     stream_out.seek(0)
 
     if DEBUG:
-        for line in data_out: print(line)
+        for line in data_out:
+            print(line)
 
     stdout.close()
     stdin.close()
 
+
 def print_host(hostname, message):
     print("[" + hostname + "] " + message)
+
 
 def get_date_s():
     date_time = datetime.datetime.now()
     date_s = date_time.strftime("%Y%m%d")
     return date_s
 
+
 def get_date_time_s():
     date_time = datetime.datetime.now()
     date_time_s = date_time.strftime("%Y%m%d%H%M")
     return date_time_s
+
 
 cmd = command

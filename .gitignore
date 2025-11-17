@@ -2,6 +2,8 @@
 *.debug
 *.shelve
 
+/.venv
+
 /dist
 /build
 /src/remotia.egg-info

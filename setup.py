@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Hive Remotia System
-# Copyright (c) 2008-2020 Hive Solutions Lda.
+# Copyright (c) 2008-2025 Hive Solutions Lda.
 #
 # This file is part of Hive Remotia System.
 #
@@ -22,16 +22,7 @@
 __author__ = "João Magalhães <joamag@hive.pt>"
 """ The author(s) of the module """
 
-__version__ = "1.0.0"
-""" The version of the module """
-
-__revision__ = "$LastChangedRevision$"
-""" The revision number of the module """
-
-__date__ = "$LastChangedDate$"
-""" The last change date of the module """
-
-__copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
+__copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
@@ -41,37 +32,22 @@ import os
 import setuptools
 
 setuptools.setup(
-    name = "remotia",
-    version = "0.2.3",
-    author = "Hive Solutions Lda.",
-    author_email = "development@hive.pt",
-    description = "Remotia System",
-    license = "Apache License, Version 2.0",
-    keywords = "remotia ssh automation console",
-    url = "http://remotia.hive.pt",
-    zip_safe = False,
-    packages = [
-        "remotia",
-        "remotia.base",
-        "remotia.deployers",
-        "remotia.scripts"
-    ],
-    package_dir = {
-        "" : os.path.normpath("src")
-    },
-    package_data = {
-        "remotia" : ["templates/*"]
-    },
-    install_requires = [
-        "legacy",
-        "paramiko"
-    ],
-    entry_points = {
-        "console_scripts" : [
-            "remotia = remotia.base.run:main"
-        ]
-    },
-    classifiers = [
+    name="remotia",
+    version="0.2.3",
+    author="Hive Solutions Lda.",
+    author_email="development@hive.pt",
+    description="Remotia System",
+    license="Apache License, Version 2.0",
+    keywords="remotia ssh automation console",
+    url="http://remotia.hive.pt",
+    zip_safe=False,
+    packages=["remotia", "remotia.base", "remotia.deployers", "remotia.scripts"],
+    test_suite="remotia.test",
+    package_dir={"": os.path.normpath("src")},
+    package_data={"remotia": ["templates/*"]},
+    install_requires=["legacy", "paramiko"],
+    entry_points={"console_scripts": ["remotia = remotia.base.run:main"]},
+    classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Topic :: Utilities",
         "License :: OSI Approved :: Apache Software License",
@@ -86,6 +62,6 @@ setuptools.setup(
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7"
-    ]
+        "Programming Language :: Python :: 3.7",
+    ],
 )

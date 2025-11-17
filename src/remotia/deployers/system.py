@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Hive Remotia System
-# Copyright (c) 2008-2020 Hive Solutions Lda.
+# Copyright (c) 2008-2025 Hive Solutions Lda.
 #
 # This file is part of Hive Remotia System.
 #
@@ -22,16 +22,7 @@
 __author__ = "João Magalhães <joamag@hive.pt>"
 """ The author(s) of the module """
 
-__version__ = "1.0.0"
-""" The version of the module """
-
-__revision__ = "$LastChangedRevision$"
-""" The revision number of the module """
-
-__date__ = "$LastChangedDate$"
-""" The last change date of the module """
-
-__copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
+__copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
@@ -43,6 +34,7 @@ import tempfile
 
 from . import common
 
+
 def deploy_keys(ssh):
     private_key = os.path.join(common.dropbox_home, "ssh", "id_rsa")
     public_key = os.path.join(common.dropbox_home, "ssh", "id_rsa.pub")
@@ -51,8 +43,10 @@ def deploy_keys(ssh):
 
     ftp = ssh.open_sftp()
     try:
-        try: ftp.mkdir("/root/.ssh", 0o700)
-        except Exception: pass
+        try:
+            ftp.mkdir("/root/.ssh", 0o700)
+        except Exception:
+            pass
         ftp.put(private_key, "/root/.ssh/id_rsa")
         ftp.put(public_key, "/root/.ssh/id_rsa.pub")
         ftp.put(known_hosts, "/root/.ssh/known_hosts")
@@ -64,10 +58,12 @@ def deploy_keys(ssh):
     finally:
         ftp.close()
 
+
 def create_users(ssh, users):
     for username, password in users:
         common.cmd(ssh, "useradd " + username)
-        common.cmd(ssh, "echo \"" + username + "\":" + password + " | chpasswd")
+        common.cmd(ssh, 'echo "' + username + '":' + password + " | chpasswd")
+
 
 def setup_environment(ssh, **kwargs):
     hostname = kwargs.get("hostname", "localhost")
@@ -80,47 +76,61 @@ def setup_environment(ssh, **kwargs):
     dns_server_1 = kwargs.get("dns_server_1", None)
     dns_server_2 = kwargs.get("dns_server_2", None)
 
-    if not ip_address: return
-    if not netmask: return
-    if not broadcast: return
-    if not network: return
-    if not gateway: return
-    if not domain: return
-    if not dns_server_1: return
-    if not dns_server_2: return
+    if not ip_address:
+        return
+    if not netmask:
+        return
+    if not broadcast:
+        return
+    if not network:
+        return
+    if not gateway:
+        return
+    if not domain:
+        return
+    if not dns_server_1:
+        return
+    if not dns_server_2:
+        return
 
     net = dict(
-        hostname = hostname,
-        ip_address = ip_address,
-        netmask = netmask,
-        broadcast = broadcast,
-        network = network,
-        gateway = gateway,
-        domain = domain,
-        dns_servers = [dns_server_1, dns_server_2]
+        hostname=hostname,
+        ip_address=ip_address,
+        netmask=netmask,
+        broadcast=broadcast,
+        network=network,
+        gateway=gateway,
+        domain=domain,
+        dns_servers=[dns_server_1, dns_server_2],
     )
 
     dir_path = tempfile.mkdtemp()
 
     loader = jinja2.FileSystemLoader(common.templates_home)
-    env = jinja2.Environment(loader = loader)
+    env = jinja2.Environment(loader=loader)
     template = env.get_template("hostname.tpl")
-    data = template.render(net = net)
+    data = template.render(net=net)
     file = open(dir_path + "/hostname", "wb")
-    try: file.write(data)
-    finally: file.close()
+    try:
+        file.write(data)
+    finally:
+        file.close()
 
     template = env.get_template("interfaces.tpl")
-    data = template.render(net = net)
+    data = template.render(net=net)
     file = open(dir_path + "/interfaces", "wb")
-    try: file.write(data)
-    finally: file.close()
+    try:
+        file.write(data)
+    finally:
+        file.close()
 
     template = env.get_template("resolv.conf.tpl")
-    data = template.render(net = net)
+    data = template.render(net=net)
     file = open(dir_path + "/resolv.conf", "wb")
-    try: file.write(data)
-    finally: file.close()
+    try:
+        file.write(data)
+    finally:
+        file.close()
 
     ftp = ssh.open_sftp()
     try:

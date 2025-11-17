@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Hive Remotia System
-# Copyright (c) 2008-2020 Hive Solutions Lda.
+# Copyright (c) 2008-2025 Hive Solutions Lda.
 #
 # This file is part of Hive Remotia System.
 #
@@ -22,16 +22,7 @@
 __author__ = "João Magalhães <joamag@hive.pt>"
 """ The author(s) of the module """
 
-__version__ = "1.0.0"
-""" The version of the module """
-
-__revision__ = "$LastChangedRevision$"
-""" The revision number of the module """
-
-__date__ = "$LastChangedDate$"
-""" The last change date of the module """
-
-__copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
+__copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
@@ -40,19 +31,27 @@ __license__ = "Apache License, Version 2.0"
 from . import apt
 from . import common
 
-def deploy_repo(ssh, path = "/opt/repo.extra"):
+
+def deploy_repo(ssh, path="/opt/repo.extra"):
     common.cmd(ssh, "mkdir -p " + path)
-    common.cmd(ssh, "cd " + path + "; wget https://raw.github.com/hivesolutions/bootstrap/master/lib/bootstrap.py")
-    common.cmd(ssh, "cd " + path + "; python bootstrap.py --download", shell = True)
-    common.cmd(ssh, "cd " + path + "; python bootstrap.py --bootstrap", shell = True)
+    common.cmd(
+        ssh,
+        "cd "
+        + path
+        + "; wget https://raw.github.com/hivesolutions/bootstrap/master/lib/bootstrap.py",
+    )
+    common.cmd(ssh, "cd " + path + "; python bootstrap.py --download", shell=True)
+    common.cmd(ssh, "cd " + path + "; python bootstrap.py --bootstrap", shell=True)
 
-def deploy_colony(ssh, path = "/opt/repo.extra"):
-    deploy_repo(ssh, path = path)
 
-def deploy_omni(ssh, path = "/opt/repo.extra"):
+def deploy_colony(ssh, path="/opt/repo.extra"):
+    deploy_repo(ssh, path=path)
+
+
+def deploy_omni(ssh, path="/opt/repo.extra"):
     apt.install_apt(ssh, "python-mysqldb")
     apt.install_apt(ssh, "python-imaging")
     apt.install_apt(ssh, "python-reportlab")
     apt.install_apt(ssh, "python-crypto")
     apt.install_apt(ssh, "python-tz")
-    deploy_repo(ssh, path = path)
+    deploy_repo(ssh, path=path)

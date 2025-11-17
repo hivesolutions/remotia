@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Hive Remotia System
-# Copyright (c) 2008-2020 Hive Solutions Lda.
+# Copyright (c) 2008-2025 Hive Solutions Lda.
 #
 # This file is part of Hive Remotia System.
 #
@@ -22,16 +22,7 @@
 __author__ = "João Magalhães <joamag@hive.pt>"
 """ The author(s) of the module """
 
-__version__ = "1.0.0"
-""" The version of the module """
-
-__revision__ = "$LastChangedRevision$"
-""" The revision number of the module """
-
-__date__ = "$LastChangedDate$"
-""" The last change date of the module """
-
-__copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
+__copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
@@ -40,6 +31,7 @@ __license__ = "Apache License, Version 2.0"
 import remotia.deployers as deployers
 
 config = deployers.config
+
 
 def init(hostname):
     """
@@ -62,10 +54,12 @@ def init(hostname):
     deployers.create_users(ssh, config.USERS)
     deployers.print_host(hostname, "finished creating users...")
 
+
 def reboot(hostname):
     ssh = deployers.get_ssh(hostname)
     deployers.reboot(ssh)
     deployers.print_host(hostname, "reboot order sent")
+
 
 def upgrade(hostname):
     ssh = deployers.get_ssh(hostname)
@@ -75,25 +69,31 @@ def upgrade(hostname):
     deployers.reboot(ssh)
     deployers.print_host(hostname, "reboot order sent")
 
+
 def dns_update(hostname):
     ssh = deployers.get_ssh(hostname)
-    if not hostname in config.DNS_SERVERS: return
+    if not hostname in config.DNS_SERVERS:
+        return
     config_v = config.DNS_CONFIG.get(hostname, {})
     deployers.update_dns(ssh, **config_v)
     deployers.print_host(hostname, "updated dns registers")
 
+
 def dhcp_update(hostname):
     ssh = deployers.get_ssh(hostname)
-    if not hostname in config.DHCP_SERVERS: return
+    if not hostname in config.DHCP_SERVERS:
+        return
     config_v = config.DHCP_CONFIG.get(hostname, {})
     deployers.update_dhcp(ssh, **config_v)
     deployers.print_host(hostname, "updated dhcp registers")
+
 
 def apt_update(hostname):
     ssh = deployers.get_ssh(hostname)
     deployers.print_host(hostname, "upgrading software...")
     deployers.update_apt(ssh)
     deployers.print_host(hostname, "software upgraded")
+
 
 def service_update(hostname):
     """
