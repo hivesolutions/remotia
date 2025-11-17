@@ -56,8 +56,11 @@ if not dropbox_base in sys.path:
 if not dropbox_home in sys.path:
     sys.path.append(dropbox_home)
 
-rconfig = __import__("rconfig")
-config = rconfig
+try:
+    rconfig = __import__("rconfig")
+    config = rconfig
+except ImportError:
+    config = None
 
 
 def get_ssh(hostname, force=False):
